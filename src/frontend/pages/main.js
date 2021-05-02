@@ -24,7 +24,7 @@ const gpHTML = (data) => {
           content: "width=device-width,initial-scale=1.0",
           name: "viewport",
         }),
-        title("Covid Haldia Hospital Stats"),
+        title("Covid Haldia Info"),
         link({
           rel: "stylesheet",
           href:

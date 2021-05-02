@@ -53,13 +53,18 @@ function HospitalRow({ hospital }) {
             background: "#e0f7fa",
           }}
         >
-          <div style={styles}>{name}</div>
+          <div style={styles}>
+            <p style={{ textDecoration: "underline" }}>
+              <b>{name}</b>
+            </p>
+          </div>
           <div style={styles}>
             <div>Beds</div>
             <div>
               <span
                 style={{
                   background: availableBeds > 0 ? "#ccff90" : "#ff8a80",
+                  fontSize: "20px",
                 }}
               >
                 {availableBeds}
@@ -69,12 +74,10 @@ function HospitalRow({ hospital }) {
             </div>
           </div>
           <div style={styles}>
-            <div>Oxygen</div>
+            <div>O2 Cylinder</div>
             <div
               style={{
-                // background: availableO2 > 0 ? "#ccff90" : "#ff8a80",
-                width: String(availableO2).length > 2 ? "24px" : "16px",
-                margin: "10px",
+                fontSize: "20px",
               }}
             >
               {availableO2}
