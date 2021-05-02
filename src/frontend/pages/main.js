@@ -48,6 +48,7 @@ const gpHTML = (data) => {
         main([div("#mainContainer", div("#root"))]),
         footer(),
         script(react),
+        style(bodyStyles),
       ]),
     ],
     { style: "font-family: 'Lato', sans-serif;" }
@@ -55,5 +56,6 @@ const gpHTML = (data) => {
 };
 
 const styles = ``;
+const bodyStyles = `width:500px;`;
 
 module.exports = { gpHTML };

@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
 import _ from "lodash";
 import M from "materialize-css";
 import { Collapsible } from "react-materialize";
@@ -52,11 +51,10 @@ function HospitalRow({ hospital }) {
           <div></div>
         </div>
         <div className="collapsible-body">
-          <div>
-            <span>{`Last Updated ${new Date(lastUpdated)}`}</span>
-          </div>
-          <span>{`Address:- ${address ? address : "N/A"}`}</span>
-          <span>{`Edited By ${updatedBy}`}</span>
+          <div>{`Last Updated ${new Date(lastUpdated)}`}</div>
+          <div> {`Address:- ${address ? address : "N/A"}`}</div>
+          <div> {`Contact:- ${contact ? contact : "N/A"}`}</div>
+          <div>{`Verified By ${updatedBy}`}</div>
         </div>
       </li>
     </Collapsible>

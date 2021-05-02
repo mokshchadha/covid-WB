@@ -2,11 +2,14 @@ const mongoose = require("mongoose");
 const { Hospital } = require("./src/repo");
 
 // Database Connection
-mongoose.connect("mongodb://127.0.0.1:27017/covidwb", {
-  useNewUrlParser: true,
-  useCreateIndex: true,
-  useUnifiedTopology: true,
-});
+mongoose.connect(
+  "mongodb+srv://moksh:one2three@cluster0.cpws5.mongodb.net/covidwb?retryWrites=true&w=majority",
+  {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useUnifiedTopology: true,
+  }
+);
 
 const data = `1,Egra Subdivisional SSH,100,69,10,90
 2,Haldia SDH,50,33,5,45
@@ -48,6 +51,7 @@ async function run() {
       return h.save();
     })
   );
+  console.log("done");
 }
 
 run();

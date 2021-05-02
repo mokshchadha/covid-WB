@@ -4,11 +4,14 @@ const finalhandler = require("finalhandler");
 const { httprouter } = require("./routes");
 const { sendErrorObject, sendObject, getRequestBody } = require("./utils/api");
 
-mongoose.connect("mongodb://127.0.0.1:27017/covidwb", {
-  useNewUrlParser: true,
-  useCreateIndex: true,
-  useUnifiedTopology: true,
-});
+mongoose.connect(
+  "mongodb+srv://moksh:one2three@cluster0.cpws5.mongodb.net/covidwb?retryWrites=true&w=majority", //connected to the production
+  {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useUnifiedTopology: true,
+  }
+);
 
 const server = http.createServer(async function (req, res) {
   printRequest(req);
