@@ -31,4 +31,4 @@ async function printRequest(req) {
   console.log("\x1b[33m%s\x1b[0m", `${ip} ${req.method} ${req.url}`);
 }
 
-server.listen("8001");
+server.listen(process.env.PORT || 8001);
