@@ -3,9 +3,11 @@ const mongoose = require("mongoose");
 const finalhandler = require("finalhandler");
 const { httprouter } = require("./routes");
 const { sendErrorObject, sendObject, getRequestBody } = require("./utils/api");
+const { getConfig, Configs } = require("../appConfigs");
+const MONGODB_URL = getConfig(Configs.MONGODB_URL);
 
 mongoose.connect(
-  "mongodb+srv://moksh:one2three@cluster0.cpws5.mongodb.net/covidwb?retryWrites=true&w=majority", //connected to the production
+  process.env.MONGODB_URI || MONGODB_URL, //connected to the production
   {
     useNewUrlParser: true,
     useCreateIndex: true,

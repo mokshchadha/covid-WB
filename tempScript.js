@@ -1,15 +1,14 @@
 const mongoose = require("mongoose");
+const { getConfig, Configs } = require("./appConfigs");
 const { Hospital } = require("./src/repo");
 
 // Database Connection
-mongoose.connect(
-  "mongodb+srv://moksh:one2three@cluster0.cpws5.mongodb.net/covidwb?retryWrites=true&w=majority",
-  {
-    useNewUrlParser: true,
-    useCreateIndex: true,
-    useUnifiedTopology: true,
-  }
-);
+const MONGO_URL = getConfig(Configs.MONGO_URL);
+mongoose.connect(MONGO_URL, {
+  useNewUrlParser: true,
+  useCreateIndex: true,
+  useUnifiedTopology: true,
+});
 
 const data = `1,Egra Subdivisional SSH,100,69,10,90
 2,Haldia SDH,50,33,5,45

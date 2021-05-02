@@ -45,7 +45,15 @@ const gpHTML = (data) => {
           src:
             "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js",
         }),
-        main([div("#mainContainer", div("#root"))]),
+        main([
+          div(
+            "#mainContainer",
+            div("#root", {
+              style:
+                "display:flex;flex-direction:column;width:400px;min-height:640px; border: 1px solid rgba(0, 0, 0, 0.33); margin:auto; padding:10px;color: rgba(0, 0, 0, 0.66)",
+            })
+          ),
+        ]),
         footer(),
         script(react),
         style(bodyStyles),
@@ -56,6 +64,7 @@ const gpHTML = (data) => {
 };
 
 const styles = ``;
-const bodyStyles = `width:500px;`;
+const bodyStyles = `width:500px;
+`;
 
 module.exports = { gpHTML };

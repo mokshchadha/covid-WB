@@ -3,6 +3,8 @@ import _ from "lodash";
 import M from "materialize-css";
 import { Collapsible } from "react-materialize";
 
+const getDate = (t) =>
+  `${new Date(t).toLocaleTimeString()}, ${new Date(t).toLocaleDateString()}`;
 export class Listing extends Component {
   state = {
     hospitals: [],
@@ -38,20 +40,49 @@ function HospitalRow({ hospital }) {
     lastUpdated,
     updatedBy,
   } = hospital;
+  const styles = { lineHeight: "2em", width: "110px", padding: "10px" };
   return (
     <Collapsible>
       <li>
         <div
           className="collapsible-header"
-          style={{ display: "flex", flexDirection: "row" }}
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-between",
+            background: "#e0f7fa",
+          }}
         >
-          <div>{name}</div>
-          <div>{`Beds Available:- ${availableBeds}/${totalBeds}`}</div>
-          <div>{`Available O2-cylinders:- ${availableO2}`}</div>
-          <div></div>
+          <div style={styles}>{name}</div>
+          <div style={styles}>
+            <div>Beds</div>
+            <div>
+              <span
+                style={{
+                  background: availableBeds > 0 ? "#ccff90" : "#ff8a80",
+                }}
+              >
+                {availableBeds}
+              </span>
+              {"/"}
+              <span>{totalBeds}</span>
+            </div>
+          </div>
+          <div style={styles}>
+            <div>Oxygen</div>
+            <div
+              style={{
+                // background: availableO2 > 0 ? "#ccff90" : "#ff8a80",
+                width: String(availableO2).length > 2 ? "24px" : "16px",
+                margin: "10px",
+              }}
+            >
+              {availableO2}
+            </div>
+          </div>
         </div>
         <div className="collapsible-body">
-          <div>{`Last Updated ${new Date(lastUpdated)}`}</div>
+          <div>{`Last Updated ${getDate(lastUpdated)}`}</div>
           <div> {`Address:- ${address ? address : "N/A"}`}</div>
           <div> {`Contact:- ${contact ? contact : "N/A"}`}</div>
           <div>{`Verified By ${updatedBy}`}</div>
