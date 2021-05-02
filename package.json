@@ -1,0 +1,52 @@
+{
+  "name": "covid-wb",
+  "version": "1.0.0",
+  "description": "website to see covid related resource availability in west bengal",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "webpack": "webpack",
+    "start": "nodemon ./src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mrsalvation/covid-WB.git"
+  },
+  "author": "moksha",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mrsalvation/covid-WB/issues"
+  },
+  "homepage": "https://github.com/mrsalvation/covid-WB#readme",
+  "dependencies": {
+    "@babel/core": "^7.14.0",
+    "@babel/plugin-transform-runtime": "^7.13.15",
+    "@babel/preset-env": "^7.14.0",
+    "@babel/preset-react": "^7.13.13",
+    "aws-sdk": "^2.897.0",
+    "babel-loader": "^8.2.2",
+    "express": "^4.17.1",
+    "finalhandler": "^1.1.2",
+    "hyperscript": "^2.0.2",
+    "hyperscript-helpers": "^3.0.3",
+    "lodash": "^4.17.21",
+    "materialize-css": "^1.0.0",
+    "mime-types": "^2.1.30",
+    "mongodb": "^3.6.6",
+    "mongoose": "^5.12.7",
+    "multiparty": "^4.2.2",
+    "nodemon": "^2.0.7",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-materialize": "^3.9.8",
+    "request": "^2.88.2",
+    "router": "^1.3.5",
+    "socket.io": "^4.0.1",
+    "socket.io-client": "^4.0.1",
+    "url": "^0.11.0",
+    "webpack": "^5.36.2"
+  },
+  "devDependencies": {
+    "webpack-cli": "^4.6.0"
+  }
+}
