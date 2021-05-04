@@ -71,6 +71,26 @@ const isEmailVerified = (email) => {
       email: "debadrita.rim@gmail.com",
       phone: " 8900481286",
     },
+    "pratyushaki151198@gmail.com": {
+      name: "Pratyusha",
+      email: "pratyushaki151198@gmail.com",
+      phone: "9647244429",
+    },
+    "007.sayandas@gmail.com": {
+      email: "007.sayandas@gmail.com",
+      name: "Sayan",
+      phone: "8900644516",
+    },
+    "ayushigodara629@gmail.com": {
+      name: "Ayushi",
+      email: "ayushigodara629@gmail.com",
+      phone: "********",
+    },
+    "sana.sanjeevani25@gmail.com": {
+      name: "Sanjeevani",
+      email: "sana.sanjeevani25@gmail.com",
+      phone: "**********",
+    },
   };
   if (!Object.keys(mailMap).includes(email))
     throw "Sorry, Person Not Authorized!";
