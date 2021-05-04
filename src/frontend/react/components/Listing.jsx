@@ -2,16 +2,23 @@ import React, { Component } from "react";
 import _ from "lodash";
 import M from "materialize-css";
 import { Collapsible } from "react-materialize";
+import { EditListing } from "./EditListing";
+import { TiTickOutline } from "react-icons/ti";
+import { ImCross } from "react-icons/im";
 
-const getDate = (t) =>
-  `${new Date(t).toLocaleTimeString()}, ${new Date(t).toLocaleDateString()}`;
+const getDate = (t) => {
+  const dateStr = new Date(t).toDateString();
+  const date = dateStr.replace("2021", "");
+  return `${new Date(t).toLocaleTimeString()}, ${date}`;
+};
 export class Listing extends Component {
   state = {
     hospitals: [],
+    isAuthorized: false,
   };
   componentDidMount() {
     M.AutoInit();
-    const res = fetch("/data").then(async (e) => {
+    fetch("/data").then(async (e) => {
       const hospitals = await e.json();
       console.log(hospitals);
       this.setState({ hospitals });
@@ -19,17 +26,24 @@ export class Listing extends Component {
   }
   render() {
     const { hospitals } = this.state;
+    const { isAuthorized, person } = this.props;
     return (
       <ul>
-        {hospitals.map((e) => (
-          <HospitalRow hospital={e} key={e.key} />
-        ))}
+        {hospitals &&
+          hospitals.map((e) => (
+            <HospitalRow
+              hospital={e}
+              key={e.key}
+              isAuthorized={isAuthorized}
+              person={person}
+            />
+          ))}
       </ul>
     );
   }
 }
 
-function HospitalRow({ hospital }) {
+function HospitalRow({ hospital, isAuthorized, person }) {
   const {
     name,
     totalBeds,
@@ -39,6 +53,7 @@ function HospitalRow({ hospital }) {
     contact,
     lastUpdated,
     updatedBy,
+    rtpcr,
   } = hospital;
   const styles = { lineHeight: "2em", width: "110px", padding: "10px" };
   return (
@@ -51,6 +66,8 @@ function HospitalRow({ hospital }) {
             flexDirection: "row",
             justifyContent: "space-between",
             background: "#e0f7fa",
+            fontSize: "10px",
+            padding: "10px",
           }}
         >
           <div style={styles}>
@@ -64,7 +81,7 @@ function HospitalRow({ hospital }) {
               <span
                 style={{
                   background: availableBeds > 0 ? "#ccff90" : "#ff8a80",
-                  fontSize: "20px",
+                  fontSize: "15px",
                 }}
               >
                 {availableBeds}
@@ -74,21 +91,36 @@ function HospitalRow({ hospital }) {
             </div>
           </div>
           <div style={styles}>
-            <div>O2 Cylinder</div>
+            <div>RTPCR TEST</div>
             <div
               style={{
-                fontSize: "20px",
+                fontSize: "15px",
               }}
             >
-              {availableO2}
+              {rtpcr ? (
+                <TiTickOutline style={{ color: "#64dd17" }} />
+              ) : (
+                <ImCross style={{ color: "#d50000" }} />
+              )}
             </div>
           </div>
         </div>
         <div className="collapsible-body">
-          <div>{`Last Updated ${getDate(lastUpdated)}`}</div>
-          <div> {`Address:- ${address ? address : "N/A"}`}</div>
-          <div> {`Contact:- ${contact ? contact : "N/A"}`}</div>
-          <div>{`Verified By ${updatedBy}`}</div>
+          <div style={{ display: "flex", flexDirection: "row" }}>
+            <div style={{ fontSize: "12px" }}>
+              <div>{`Updated ${getDate(lastUpdated)}`}</div>
+              <div> {`Address:- ${address ? address : "N/A"}`}</div>
+              <div> {`Contact:- ${contact ? contact : "N/A"}`}</div>
+              <div
+                style={{ fontSize: "10px" }}
+              >{`Verified By ${updatedBy}`}</div>
+            </div>
+            <div style={{ marginLeft: "10px" }}>
+              {isAuthorized && (
+                <EditListing hospital={hospital} person={person} />
+              )}
+            </div>
+          </div>
         </div>
       </li>
     </Collapsible>
