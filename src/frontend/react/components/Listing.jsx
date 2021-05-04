@@ -98,7 +98,7 @@ function HospitalRow({ hospital, isAuthorized, person }) {
               }}
             >
               {rtpcr ? (
-                <TiTickOutline style={{ color: "#64dd17" }} />
+                <TiTickOutline style={{ color: "#64dd17", fontSize: "30px" }} />
               ) : (
                 <ImCross style={{ color: "#d50000" }} />
               )}

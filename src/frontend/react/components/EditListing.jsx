@@ -26,13 +26,14 @@ export class EditListing extends Component {
     };
     console.log("submission Data in here ", d);
     fetch(`/data/${d._id}`, options)
-      .then((e) => {
-        if (e?.msg.includes("Error")) throw e;
-        alert(e);
+      .then(async (e) => {
+        const m = await e.json();
+        alert(m);
+        window.location.reload();
       })
       .catch((e) => {
         alert(e.toString());
-        window.location.reload;
+        window.location.reload();
       });
   }
 
@@ -78,7 +79,7 @@ class EditHospitalForm extends Component {
 
   render() {
     const { hospital } = this.state;
-    const { name, availableBeds, totalBeds, rtpcr } = hospital;
+    const { name, availableBeds, totalBeds, address, contact } = hospital;
     const flexOptions = {
       display: "flex",
       flexDirection: "row",
@@ -108,13 +109,24 @@ class EditHospitalForm extends Component {
           </div>
         </div>
         <div style={flexOptions}>
-          <div style={{ paddingTop: "17px" }}>RTPCR</div>
+          <div style={{ paddingTop: "17px" }}>Address</div>
           <div>
             <input
               type="text"
-              value={rtpcr}
+              value={address}
               style={{ marginLeft: "20px" }}
-              onChange={(e) => this.updateForm(e.target.value, "rtpcr")}
+              onChange={(e) => this.updateForm(e.target.value, "address")}
+            ></input>
+          </div>
+        </div>
+        <div style={flexOptions}>
+          <div style={{ paddingTop: "17px" }}>Contact</div>
+          <div>
+            <input
+              type="text"
+              value={contact}
+              style={{ marginLeft: "20px" }}
+              onChange={(e) => this.updateForm(e.target.value, "contact")}
             ></input>
           </div>
         </div>

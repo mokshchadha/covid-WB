@@ -44,7 +44,9 @@ httprouter.route("/data/:id").post(async function (req, res) {
     const { data, person } = reqData;
     const filtered = transformUpdate(data, person);
     console.log("filtered data ", filtered);
-    await Hospital.findAndModify({ _id: ObjectId(req.params.id) }, filtered);
+    await Hospital.findOneAndUpdate({ _id: ObjectId(req.params.id) }, filtered);
+    const fff = await Hospital.findOne({ _id: ObjectId(req.params.id) });
+    console.log(fff);
     res.sendObject({ msg: "Success" });
   } catch (error) {
     console.error(error);
@@ -86,7 +88,6 @@ transformUpdate = (data, person) => {
     lastUpdated: new Date().getTime(),
     updatedBy: `${person.email}-(${person.phone})`,
   };
-  console.log("about to retur n ", res);
   return _.omit(res, ["_id", "__v"]);
 };
 
