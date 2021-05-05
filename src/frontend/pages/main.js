@@ -12,7 +12,6 @@ const {
   head,
   script,
   style,
-  label,
 } = hh;
 
 const gpHTML = (data) => {

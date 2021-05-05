@@ -1,14 +1,19 @@
 const mongoose = require("mongoose");
 const { getConfig, Configs } = require("./appConfigs");
-const { Hospital } = require("./src/repo");
+const { Hospital, RtpcrCentres } = require("./src/repo");
 
 // Database Connection
-const MONGO_URL = getConfig(Configs.MONGO_URL);
-mongoose.connect(MONGO_URL, {
-  useNewUrlParser: true,
-  useCreateIndex: true,
-  useUnifiedTopology: true,
-});
+const MONGODB_URL = getConfig(Configs.MONGODB_URL);
+
+mongoose.connect(
+  process.env.MONGODB_URI || MONGODB_URL, //connected to the production
+  {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+  }
+);
 
 const data = `1,Egra Subdivisional SSH,100,69,10,90
 2,Haldia SDH,50,33,5,45
@@ -53,4 +58,44 @@ async function run() {
   console.log("done");
 }
 
-run();
+const rtpcLab = `SLR Diagnostics-Manjushree,Haldia,WB,721602-9647955665-Sujay
+Barghasipur Prathamik Sasthakendra-Dighasipur, Bhabanipur,Chakdipa-NA-Sujay
+Haldia Subdivisional Hospital-Manjushree,Haldia,WB,721602-3224274108-Sujay
+Dr. B.C. Roy Hospital-Banbishnupur, Balughata Rd,Haldia,721645-8170008563-Sujay
+Chandipur Hospital-Chandipur - Nandigram Rd, Erashal, West Bengal 721659-03228 272 250-Sanjana
+Basulia Gramin Hospital-Haldia Tamluk Mechada road Maishadal,721628-3224240243-Prithwiraj
+Bio Care Diagnostic Center-Hpl Link Road, Basudevpur, HALDIA - 721604-9732557909-Pratyusha 
+SRL Diagnostics-13 More, Haldia Township-9593095242-Sujay
+Home collection in haldia-Haldia-7908912594/7001866300-Barsha`;
+
+async function rtpcrData() {
+  const dataObjs = rtpcLab
+    .split("\n")
+    .map((e) => e.trim())
+    .map((e) =>
+      e.split("-").reduce(
+        (a, f, i, s) => ({
+          name: s[0],
+          address: s[1],
+          contact: s[2],
+          lastUpdated: new Date().getTime(),
+          updatedBy: s[3],
+        }),
+        {}
+      )
+    );
+  console.log(dataObjs);
+  await Promise.all(
+    dataObjs.map((e) => {
+      const h = new RtpcrCentres(e);
+      return h.save();
+    })
+  );
+  console.log("done");
+}
+
+try {
+  rtpcrData();
+} catch (error) {
+  console.log("herer");
+}

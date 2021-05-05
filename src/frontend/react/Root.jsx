@@ -1,17 +1,26 @@
 import React, { Component } from "react";
 import _ from "lodash";
-import { Listing } from "./components/Listing";
+import M from "materialize-css";
+import { HospitalListing } from "./components/HospitalListing/Listing";
+import { RtpcrListing } from "./components/RtpcrListing/Listing";
 import { MdLocalHospital } from "react-icons/md";
-import { FaGoogle } from "react-icons/fa";
+import {
+  FaGoogle,
+  FaHospital,
+  FaPhoneAlt,
+  FaClinicMedical,
+} from "react-icons/fa";
+import { BsInfoCircleFill } from "react-icons/bs";
 import {
   initializePublicOauth,
   serverSideVerification,
 } from "./utils/authorization";
-import { Button } from "react-materialize";
+import { Collapsible } from "react-materialize";
 
-export class Root extends React.Component {
+export class Root extends Component {
   state = { auth: "", isAuthorized: false, person: {} };
   componentDidMount() {
+    M.AutoInit();
     initializePublicOauth().then((auth) => this.setState({ auth }));
   }
 
@@ -58,9 +67,49 @@ export class Root extends React.Component {
             )}
           </div>
         </div>
-        <div>
-          <Listing isAuthorized={isAuthorized} person={person} />
-        </div>
+        <ul>
+          <Collapsible>
+            <li>
+              <div className="collapsible-header">
+                <FaClinicMedical />
+                <b style={{ marginLeft: "20px" }}>RTPCR Test Centers</b>
+              </div>
+              <div className="collapsible-body">
+                <RtpcrListing isAuthorized={isAuthorized} person={person} />
+              </div>
+            </li>
+          </Collapsible>
+          <Collapsible>
+            <li>
+              <div className="collapsible-header">
+                <FaHospital />
+                <b style={{ marginLeft: "20px" }}>Hospital's Information</b>
+              </div>
+              <div className="collapsible-body">
+                <HospitalListing isAuthorized={isAuthorized} person={person} />
+              </div>
+            </li>
+          </Collapsible>
+
+          <Collapsible>
+            <li>
+              <div className="collapsible-header">
+                <FaPhoneAlt />
+                <b style={{ marginLeft: "20px" }}>Telemedicine helpline</b>
+              </div>
+              <div className="collapsible-body">{}</div>
+            </li>
+          </Collapsible>
+          <Collapsible>
+            <li>
+              <div className="collapsible-header">
+                <BsInfoCircleFill />
+                <b style={{ marginLeft: "20px" }}>About</b>
+              </div>
+              <div className="collapsible-body">{}</div>
+            </li>
+          </Collapsible>
+        </ul>
       </div>
     );
   }

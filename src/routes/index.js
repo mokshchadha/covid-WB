@@ -1,8 +1,9 @@
 const Router = require("router");
 const _ = require("lodash");
 const { ObjectId } = require("mongodb");
-const { Hospital } = require("../repo");
+const { Hospital, RtpcrCentres } = require("../repo");
 const { gpHTML } = require("../frontend/pages/main");
+const { isEmailVerified } = require("./constants");
 
 function unescapeHTML(s) {
   return String(s)
@@ -28,6 +29,15 @@ httprouter.route("/data").get(async function (req, res) {
   }
 });
 
+httprouter.route("/rtpc").get(async function (req, res) {
+  try {
+    const data = await RtpcrCentres.find({});
+    res.sendObject(data);
+  } catch (error) {
+    res.sendError(500, { msg: "server crash" });
+  }
+});
+
 httprouter.route("/login").post(async function (req, res) {
   try {
     const email = await req.getRequestBody();
@@ -45,8 +55,6 @@ httprouter.route("/data/:id").post(async function (req, res) {
     const filtered = transformUpdate(data, person);
     console.log("filtered data ", filtered);
     await Hospital.findOneAndUpdate({ _id: ObjectId(req.params.id) }, filtered);
-    const fff = await Hospital.findOne({ _id: ObjectId(req.params.id) });
-    console.log(fff);
     res.sendObject({ msg: "Success" });
   } catch (error) {
     console.error(error);
@@ -54,57 +62,38 @@ httprouter.route("/data/:id").post(async function (req, res) {
   }
 });
 
-const isEmailVerified = (email) => {
-  const mailMap = {
-    "chadhamoksh@gmail.com": {
-      name: "Moksh",
-      email: "chadhamoksh@gmail.com",
-      phone: "9459845615",
-    },
-    "rbarsharoy@gmail.com": {
-      name: "Barsha",
-      email: "rbarsharoy@gmail.com",
-      phone: "8016518175",
-    },
-    "debadrita.rim@gmail.com": {
-      name: "Debadrita",
-      email: "debadrita.rim@gmail.com",
-      phone: " 8900481286",
-    },
-    "pratyushaki151198@gmail.com": {
-      name: "Pratyusha",
-      email: "pratyushaki151198@gmail.com",
-      phone: "9647244429",
-    },
-    "007.sayandas@gmail.com": {
-      email: "007.sayandas@gmail.com",
-      name: "Sayan",
-      phone: "8900644516",
-    },
-    "ayushigodara629@gmail.com": {
-      name: "Ayushi",
-      email: "ayushigodara629@gmail.com",
-      phone: "********",
-    },
-    "sana.sanjeevani25@gmail.com": {
-      name: "Sanjeevani",
-      email: "sana.sanjeevani25@gmail.com",
-      phone: "**********",
-    },
-  };
-  if (!Object.keys(mailMap).includes(email))
-    throw "Sorry, Person Not Authorized!";
+httprouter.route("/rtpcr/:id").post(async function (req, res) {
+  try {
+    const reqData = await req.getRequestBody();
+    const { data, person } = reqData;
+    const filtered = transformRtpcrUpdate(data, person);
+    await RtpcrCentres.findOneAndUpdate(
+      { _id: ObjectId(req.params.id) },
+      filtered
+    );
+    res.sendObject({ msg: "Success" });
+  } catch (error) {
+    console.error(error);
+    res.sendError(400, { msg: "Error" + error });
+  }
+});
 
-  return mailMap[email];
-};
-
-transformUpdate = (data, person) => {
-  console.log("insided the transform ");
+const transformUpdate = (data, person) => {
   const res = {
     ...data,
     name: data?.name ? data.name.toUpperCase() : "",
     rtpcr: String(data.rtpcr) === "true" ? true : false,
     availableBeds: parseInt(data.availableBeds),
+    lastUpdated: new Date().getTime(),
+    updatedBy: `${person.email}-(${person.phone})`,
+  };
+  return _.omit(res, ["_id", "__v"]);
+};
+
+const transformRtpcrUpdate = (data, person) => {
+  const res = {
+    ...data,
+    name: data?.name ? data.name.toUpperCase() : "",
     lastUpdated: new Date().getTime(),
     updatedBy: `${person.email}-(${person.phone})`,
   };

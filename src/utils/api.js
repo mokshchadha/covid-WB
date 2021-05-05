@@ -2,9 +2,6 @@ const normalRequest = require("request");
 const url = require("url");
 const fs = require("fs");
 const _ = require("lodash");
-const multiparty = require("multiparty");
-var AWS = require("aws-sdk");
-const mime = require("mime-types");
 
 function sendObject(res, object) {
   res.setHeader("Content-Type", "application/json; charset=utf-8");
@@ -55,61 +52,8 @@ const HTTPClient = {
   },
 };
 
-function handleMultiPartRequest(req) {
-  return new Promise((resolve, reject) => {
-    const form = new multiparty.Form({
-      uploadDir: "media",
-    });
-    var fields = {};
-    var files = [];
-    form.on("error", function (err) {
-      reject(err);
-    });
-    form.on("field", function (name, value) {
-      fields[name] = value;
-    });
-    form.on("file", function (name, file) {
-      fs.renameSync(file.path, "media/" + file.originalFilename);
-      files.push(file.originalFilename);
-    });
-    form.on("close", function () {
-      console.log("fields:");
-      console.log(fields);
-      console.log("files:");
-      console.log(files);
-      if (files.length > 0) resolve({ fields, files });
-    });
-    form.parse(req);
-  });
-}
-
 function getURLQuery(reqUrl) {
   return url.parse(reqUrl, true)?.query;
-}
-
-async function downloadFile(options, Key) {
-  let filename = "";
-  let contentType = "";
-  const wStream = normalRequest(options)
-    .on("response", (res) => {
-      contentType = res.headers["content-type"].split(";")[0];
-      const ext = contentType
-        ? _.findKey(mime.types, (o) => o === contentType)
-        : "nop";
-      filename = Key + "." + ext;
-    })
-    .pipe(fs.createWriteStream("media/" + Key));
-
-  return new Promise(function (resolve, reject) {
-    wStream.on("finish", () => {
-      console.log("All writes are now complete.");
-      resolve({ filename, Key, contentType });
-    });
-    wStream.on("error", (e) => {
-      console.log(e);
-      reject(e);
-    });
-  });
 }
 
 async function uploadFileToS3(o, deleteFile = true) {
@@ -151,8 +95,6 @@ module.exports = {
   getRequestBody,
   request,
   getURLQuery,
-  handleMultiPartRequest,
   uploadFileToS3,
-  downloadFile,
   HTTPClient,
 };
