@@ -1,15 +1,16 @@
 import React, { Component } from "react";
 import _ from "lodash";
-import { GiLoveInjection } from "react-icons/gi";
+import M from "materialize-css";
 import { getDate } from "../../utils/dateTime";
 import { EditRtpcr } from "./EditListing";
 
 export class RtpcrListing extends Component {
   state = {
-    rtpcr: [],
+    rtpcr: null,
     isAuthorized: false,
   };
   componentDidMount() {
+    M.AutoInit();
     fetch("/rtpc").then(async (e) => {
       const rtpcr = await e.json();
       console.log("rtpcr ", rtpcr);

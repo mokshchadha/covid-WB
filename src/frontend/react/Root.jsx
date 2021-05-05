@@ -11,11 +11,12 @@ import {
   FaClinicMedical,
 } from "react-icons/fa";
 import { BsInfoCircleFill } from "react-icons/bs";
+import { BiCaretDown } from "react-icons/bi";
 import {
   initializePublicOauth,
   serverSideVerification,
 } from "./utils/authorization";
-import { Collapsible } from "react-materialize";
+import Collapsible from "react-collapsible";
 
 export class Root extends Component {
   state = { auth: "", isAuthorized: false, person: {} };
@@ -47,6 +48,7 @@ export class Root extends Component {
   render() {
     console.log("this.state.auth", this.state.auth);
     const { auth, isAuthorized, person } = this.state;
+    const flexStyle = { margin: "20px", display: "flex", flexDirection: "row" };
     return (
       <div>
         <div style={{ display: "flex", flexDirection: "row" }}>
@@ -67,49 +69,55 @@ export class Root extends Component {
             )}
           </div>
         </div>
-        <ul>
-          <Collapsible>
-            <li>
-              <div className="collapsible-header">
-                <FaClinicMedical />
-                <b style={{ marginLeft: "20px" }}>RTPCR Test Centers</b>
-              </div>
-              <div className="collapsible-body">
-                <RtpcrListing isAuthorized={isAuthorized} person={person} />
-              </div>
-            </li>
-          </Collapsible>
-          <Collapsible>
-            <li>
-              <div className="collapsible-header">
-                <FaHospital />
-                <b style={{ marginLeft: "20px" }}>Hospital's Information</b>
-              </div>
-              <div className="collapsible-body">
-                <HospitalListing isAuthorized={isAuthorized} person={person} />
-              </div>
-            </li>
-          </Collapsible>
-
-          <Collapsible>
-            <li>
-              <div className="collapsible-header">
-                <FaPhoneAlt />
-                <b style={{ marginLeft: "20px" }}>Telemedicine helpline</b>
-              </div>
-              <div className="collapsible-body">{}</div>
-            </li>
-          </Collapsible>
-          <Collapsible>
-            <li>
-              <div className="collapsible-header">
-                <BsInfoCircleFill />
-                <b style={{ marginLeft: "20px" }}>About</b>
-              </div>
-              <div className="collapsible-body">{}</div>
-            </li>
-          </Collapsible>
-        </ul>
+        <div>
+          <div style={flexStyle}>
+            <FaClinicMedical />
+            <div style={{ marginLeft: "10px" }}>
+              <Collapsible trigger={"RTPCR Test Centers"}>
+                <div style={{ width: "300px" }}>
+                  <RtpcrListing isAuthorized={isAuthorized} person={person} />
+                </div>
+              </Collapsible>
+            </div>
+            <BiCaretDown />
+          </div>
+          <div style={flexStyle}>
+            <FaHospital />
+            <div style={{ marginLeft: "10px" }}>
+              <Collapsible trigger={"Hospital Information"}>
+                <div style={{ width: "300px" }}>
+                  <HospitalListing
+                    isAuthorized={isAuthorized}
+                    person={person}
+                  />
+                </div>
+              </Collapsible>
+            </div>
+            <BiCaretDown />
+          </div>
+          <div style={flexStyle}>
+            <FaPhoneAlt />
+            <div style={{ marginLeft: "10px" }}>
+              <Collapsible trigger={"Telemedicine helpline"}>
+                <div style={{ width: "300px" }}>
+                  <p>Data Pending, Come Back soon</p>
+                </div>
+              </Collapsible>
+            </div>
+            <BiCaretDown />
+          </div>
+          <div style={flexStyle}>
+            <BsInfoCircleFill />
+            <div style={{ marginLeft: "10px" }}>
+              <Collapsible trigger={"About"}>
+                <div style={{ width: "300px" }}>
+                  <p>Data Pending, Come Back soon</p>
+                </div>
+              </Collapsible>
+            </div>
+            <BiCaretDown />
+          </div>
+        </div>
       </div>
     );
   }

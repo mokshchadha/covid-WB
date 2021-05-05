@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import _ from "lodash";
+import M from "materialize-css";
 import { Collapsible } from "react-materialize";
 import { EditListing } from "./EditListing";
 import { TiTickOutline } from "react-icons/ti";
@@ -8,10 +9,11 @@ import { getDate } from "../../utils/dateTime";
 
 export class HospitalListing extends Component {
   state = {
-    hospitals: [],
+    hospitals: null,
     isAuthorized: false,
   };
   componentDidMount() {
+    M.AutoInit();
     fetch("/data").then(async (e) => {
       const hospitals = await e.json();
       console.log(hospitals);
