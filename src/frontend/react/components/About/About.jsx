@@ -1,7 +1,7 @@
 import React from "react";
 export function About() {
   return (
-    <p>
+    <div>
       <p>
         <strong>Purba Medinipur Covid Info</strong> is a platform where people
         of Purba Midnapore district can
@@ -30,6 +30,6 @@ export function About() {
         <br />
         and support in such uncertain times.
       </p>
-    </p>
+    </div>
   );
 }

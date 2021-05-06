@@ -4,6 +4,7 @@ import M from "materialize-css";
 import { HospitalListing } from "./components/HospitalListing/Listing";
 import { RtpcrListing } from "./components/RtpcrListing/Listing";
 import { About } from "./components/About/About";
+import { Telemedicine } from "./components/TeleMedicine";
 import { MdLocalHospital } from "react-icons/md";
 import {
   FaGoogle,
@@ -107,7 +108,7 @@ export class Root extends Component {
                 trigger={"Telemedicine helpline------------------------"}
               >
                 <div style={{ width: "300px" }}>
-                  <p>Data Pending, Come Back soon</p>
+                  <Telemedicine />
                 </div>
               </Collapsible>
             </div>
