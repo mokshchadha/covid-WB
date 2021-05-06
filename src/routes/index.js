@@ -25,6 +25,7 @@ httprouter.route("/data").get(async function (req, res) {
     const data = await Hospital.find({});
     res.sendObject(data);
   } catch (error) {
+    console.error(error);
     res.sendError(500, { msg: "server crash" });
   }
 });
@@ -34,6 +35,7 @@ httprouter.route("/rtpc").get(async function (req, res) {
     const data = await RtpcrCentres.find({});
     res.sendObject(data);
   } catch (error) {
+    console.error(error);
     res.sendError(500, { msg: "server crash" });
   }
 });
