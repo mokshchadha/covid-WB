@@ -3,6 +3,7 @@ import _ from "lodash";
 import M from "materialize-css";
 import { HospitalListing } from "./components/HospitalListing/Listing";
 import { RtpcrListing } from "./components/RtpcrListing/Listing";
+import { About } from "./components/About/About";
 import { MdLocalHospital } from "react-icons/md";
 import {
   FaGoogle,
@@ -73,7 +74,9 @@ export class Root extends Component {
           <div style={flexStyle}>
             <FaClinicMedical />
             <div style={{ marginLeft: "10px" }}>
-              <Collapsible trigger={"RTPCR Test Centers"}>
+              <Collapsible
+                trigger={"RTPCR Test Centers---------------------------"}
+              >
                 <div style={{ width: "300px" }}>
                   <RtpcrListing isAuthorized={isAuthorized} person={person} />
                 </div>
@@ -84,7 +87,9 @@ export class Root extends Component {
           <div style={flexStyle}>
             <FaHospital />
             <div style={{ marginLeft: "10px" }}>
-              <Collapsible trigger={"Hospital Information"}>
+              <Collapsible
+                trigger={"Hospital Information--------------------------"}
+              >
                 <div style={{ width: "300px" }}>
                   <HospitalListing
                     isAuthorized={isAuthorized}
@@ -98,7 +103,9 @@ export class Root extends Component {
           <div style={flexStyle}>
             <FaPhoneAlt />
             <div style={{ marginLeft: "10px" }}>
-              <Collapsible trigger={"Telemedicine helpline"}>
+              <Collapsible
+                trigger={"Telemedicine helpline------------------------"}
+              >
                 <div style={{ width: "300px" }}>
                   <p>Data Pending, Come Back soon</p>
                 </div>
@@ -109,9 +116,11 @@ export class Root extends Component {
           <div style={flexStyle}>
             <BsInfoCircleFill />
             <div style={{ marginLeft: "10px" }}>
-              <Collapsible trigger={"About"}>
+              <Collapsible
+                trigger={"About---------------------------------------------"}
+              >
                 <div style={{ width: "300px" }}>
-                  <p>Data Pending, Come Back soon</p>
+                  <About />
                 </div>
               </Collapsible>
             </div>
