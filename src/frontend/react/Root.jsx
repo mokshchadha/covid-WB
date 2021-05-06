@@ -76,7 +76,7 @@ export class Root extends Component {
             <FaClinicMedical />
             <div style={{ marginLeft: "10px" }}>
               <Collapsible
-                trigger={"RTPCR Test Centers---------------------------"}
+                trigger={"RTPCR Test Centers--------------------------------"}
               >
                 <div style={{ width: "300px" }}>
                   <RtpcrListing isAuthorized={isAuthorized} person={person} />
@@ -89,7 +89,9 @@ export class Root extends Component {
             <FaHospital />
             <div style={{ marginLeft: "10px" }}>
               <Collapsible
-                trigger={"Hospital Information--------------------------"}
+                trigger={
+                  "Hospital Information---------------------------------"
+                }
               >
                 <div style={{ width: "300px" }}>
                   <HospitalListing
@@ -105,7 +107,7 @@ export class Root extends Component {
             <FaPhoneAlt />
             <div style={{ marginLeft: "10px" }}>
               <Collapsible
-                trigger={"Telemedicine helpline------------------------"}
+                trigger={"Telemedicine helpline-------------------------------"}
               >
                 <div style={{ width: "300px" }}>
                   <Telemedicine />
@@ -118,7 +120,9 @@ export class Root extends Component {
             <BsInfoCircleFill />
             <div style={{ marginLeft: "10px" }}>
               <Collapsible
-                trigger={"About---------------------------------------------"}
+                trigger={
+                  "About---------------------------------------------------"
+                }
               >
                 <div style={{ width: "300px" }}>
                   <About />
