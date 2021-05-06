@@ -61,17 +61,17 @@ function HospitalRow({ hospital, isAuthorized, person }) {
             display: "flex",
             flexDirection: "row",
             justifyContent: "space-between",
-            background: "#e0f7fa",
+            background: "#e1f5fe",
             fontSize: "10px",
-            padding: "10px",
+            padding: "5px",
           }}
         >
-          <div style={styles}>
+          <div style={{ lineHeight: "2em", width: "210px", padding: "5px" }}>
             <p style={{ textDecoration: "underline" }}>
               <b>{name}</b>
             </p>
           </div>
-          <div style={styles}>
+          <div style={{ lineHeight: "2em", width: "50px", padding: "5px" }}>
             <div>Beds</div>
             <div>
               <span
@@ -86,8 +86,8 @@ function HospitalRow({ hospital, isAuthorized, person }) {
               <span>{totalBeds}</span>
             </div>
           </div>
-          <div style={styles}>
-            <div>RTPCR TEST</div>
+          <div style={{ lineHeight: "2em", width: "50px", padding: "5px" }}>
+            <div>RTPCR</div>
             <div
               style={{
                 fontSize: "15px",
