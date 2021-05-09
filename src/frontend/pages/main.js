@@ -24,11 +24,11 @@ const gpHTML = (data) => {
           name: "viewport",
         }),
         title("Purba Medinipur Covid Info"),
-        link({
-          rel: "stylesheet",
-          href:
-            "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css",
-        }),
+        // link({
+        //   rel: "stylesheet",
+        //   href:
+        //     "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css",
+        // }),
         link({
           rel: "favicon",
           href: "https://fonts.googleapis.com/css?family=Lato",
@@ -40,10 +40,10 @@ const gpHTML = (data) => {
         script({
           src: "https://code.jquery.com/jquery-2.1.1.min.js",
         }),
-        script({
-          src:
-            "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js",
-        }),
+        // script({
+        //   src:
+        //     "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js",
+        // }),
         main([
           div(
             "#mainContainer",

@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import _ from "lodash";
-import M from "materialize-css";
 import { HospitalListing } from "./components/HospitalListing/Listing";
 import { RtpcrListing } from "./components/RtpcrListing/Listing";
 import { About } from "./components/About/About";
@@ -8,7 +7,6 @@ import { Telemedicine } from "./components/TeleMedicine";
 import { ContactUs } from "./components/ContactUs";
 import { ImportantLinks } from "./components/ImportantLinks";
 import { Ambulances } from "./components/Ambulances";
-import { MdLocalHospital } from "react-icons/md";
 import {
   FaGoogle,
   FaHospital,
@@ -28,7 +26,6 @@ import { Collapsible } from "react-materialize";
 export class Root extends Component {
   state = { auth: "", isAuthorized: false, person: {} };
   componentDidMount() {
-    M.AutoInit();
     initializePublicOauth().then((auth) => this.setState({ auth }));
   }
 
@@ -190,5 +187,24 @@ export class Root extends Component {
               </li>
             </Collapsible>
           </ul>
+
+          <div style={flexStyle}>
+            <FaHospital />
+            <div style={{ marginLeft: "10px" }}>
+              <Collapsible
+                trigger={
+                  "Hospital Information---------------------------------"
+                }
+              >
+                <div style={{ width: "300px" }}>
+                  <HospitalListing
+                    isAuthorized={isAuthorized}
+                    person={person}
+                  />
+                </div>
+              </Collapsible>
+            </div>
+            <BiCaretDown />
+          </div>
         
 */

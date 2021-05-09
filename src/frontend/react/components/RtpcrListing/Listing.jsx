@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import _ from "lodash";
-import M from "materialize-css";
 import { getDate } from "../../utils/dateTime";
 import { EditRtpcr } from "./EditListing";
 import { Collapsible } from "react-materialize";
@@ -11,7 +10,6 @@ export class RtpcrListing extends Component {
     isAuthorized: false,
   };
   componentDidMount() {
-    M.AutoInit();
     fetch("/rtpc").then(async (e) => {
       const rtpcr = await e.json();
       console.log("rtpcr ", rtpcr);
