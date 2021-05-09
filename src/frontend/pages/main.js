@@ -49,7 +49,7 @@ const gpHTML = (data) => {
             "#mainContainer",
             div("#root", {
               style:
-                "display:flex;flex-direction:column;width:400px;min-height:640px; border: 1px solid rgba(0, 0, 0, 0.33); margin:auto; padding:10px;color: rgba(0, 0, 0, 0.66)",
+                "display:flex;flex-direction:column;width:400px;min-height:740px; border: 1px solid rgba(0, 0, 0, 0.33); margin:auto; padding:10px;color: rgba(0, 0, 0, 0.66);background:#e1f5fe",
             })
           ),
         ]),
@@ -62,7 +62,7 @@ const gpHTML = (data) => {
   );
 };
 
-const styles = ``;
+const styles = `background:#00b0ff`;
 const bodyStyles = `width:500px;
 `;
 

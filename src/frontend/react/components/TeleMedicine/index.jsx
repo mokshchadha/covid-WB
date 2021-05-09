@@ -3,7 +3,7 @@ import React from "react";
 export function Telemedicine() {
   return (
     <div>
-      <table>
+      <table className="striped center">
         <tbody>
           <tr>
             <td>

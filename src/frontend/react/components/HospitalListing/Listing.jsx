@@ -61,7 +61,7 @@ function HospitalRow({ hospital, isAuthorized, person }) {
             display: "flex",
             flexDirection: "row",
             justifyContent: "space-between",
-            background: "#e1f5fe",
+            background: "#fffff",
             fontSize: "10px",
             padding: "5px",
           }}

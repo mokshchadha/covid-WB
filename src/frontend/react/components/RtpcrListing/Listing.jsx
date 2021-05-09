@@ -39,7 +39,6 @@ export class RtpcrListing extends Component {
 
 function RtpcrRow({ rtpcrData, isAuthorized, person }) {
   const { name, address, contact, lastUpdated, updatedBy } = rtpcrData;
-  const styles = { lineHeight: "2em", width: "110px", padding: "10px" };
   return (
     <div>
       <div style={{ fontSize: "10px" }}>
@@ -51,9 +50,9 @@ function RtpcrRow({ rtpcrData, isAuthorized, person }) {
                 display: "flex",
                 flexDirection: "row",
                 justifyContent: "space-between",
-                background: "#e1f5fe",
+                background: "#ffffff",
                 fontSize: "10px",
-                padding: "5px",
+                padding: "0px",
                 height: "10px",
               }}
             >
