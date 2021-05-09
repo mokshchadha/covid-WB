@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import _ from "lodash";
 import { getDate } from "../../utils/dateTime";
 import { EditRtpcr } from "./EditListing";
-import { Collapsible } from "react-materialize";
+import ReactCollapsible from "react-collapsible";
 
 export class RtpcrListing extends Component {
   state = {
@@ -20,7 +20,7 @@ export class RtpcrListing extends Component {
     const { rtpcr } = this.state;
     const { isAuthorized, person } = this.props;
     return (
-      <ul>
+      <div>
         {rtpcr &&
           rtpcr.map((e) => (
             <RtpcrRow
@@ -30,7 +30,7 @@ export class RtpcrListing extends Component {
               person={person}
             />
           ))}
-      </ul>
+      </div>
     );
   }
 }
@@ -39,41 +39,37 @@ function RtpcrRow({ rtpcrData, isAuthorized, person }) {
   const { name, address, contact, lastUpdated, updatedBy } = rtpcrData;
   return (
     <div>
-      <div style={{ fontSize: "10px" }}>
-        <Collapsible>
-          <li>
+      <div style={{ fontSize: "12px" }}>
+        <ReactCollapsible
+          trigger={
             <div
-              className="collapsible-header"
               style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "space-between",
-                background: "#ffffff",
-                fontSize: "10px",
-                padding: "0px",
-                height: "10px",
+                background: "white",
+                margin: "2px",
+                paddingLeft: "10px",
+                paddingTop: "1px",
+                paddingBottom: "1px",
               }}
             >
-              <b style={{ marginBottom: "5px", paddingLeft: "15px" }}>{name}</b>
+              {name}
             </div>
-            <div className="collapsible-body" style={{ padding: "7px 7px" }}>
-              <p>
-                {`Contact:- ${contact}`}
-                <br />
-                {`Address:- ${address}`}
-                <br />
-                {`LastUpdated:- ${getDate(lastUpdated)}`}
-                <br />
-                {`Verified By:- ${updatedBy}`}
-              </p>
-              <div>
-                {isAuthorized && person && (
-                  <EditRtpcr rtpcrCenter={rtpcrData} person={person} />
-                )}
-              </div>
-            </div>
-          </li>
-        </Collapsible>
+          }
+        >
+          <p>
+            {`Contact:- ${contact}`}
+            <br />
+            {`Address:- ${address}`}
+            <br />
+            {`LastUpdated:- ${getDate(lastUpdated)}`}
+            <br />
+            {`Verified By:- ${updatedBy}`}
+          </p>
+          <div>
+            {isAuthorized && person && (
+              <EditRtpcr rtpcrCenter={rtpcrData} person={person} />
+            )}
+          </div>
+        </ReactCollapsible>
       </div>
     </div>
   );
