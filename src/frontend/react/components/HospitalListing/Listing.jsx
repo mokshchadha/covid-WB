@@ -60,8 +60,10 @@ function HospitalRow({ hospital, isAuthorized, person }) {
         />
       }
     >
-      <div style={{ display: "flex", flexDirection: "row" }}>
-        <div style={{ fontSize: "12px" }}>
+      <div
+        style={{ display: "flex", flexDirection: "row", marginLeft: "10px" }}
+      >
+        <div style={{ fontSize: "12px", padding: "3px" }}>
           <div>{`Updated ${getDate(lastUpdated)}`}</div>
           <div> {`Address:- ${address ? address : "N/A"}`}</div>
           <div> {`Contact:- ${contact ? contact : "N/A"}`}</div>

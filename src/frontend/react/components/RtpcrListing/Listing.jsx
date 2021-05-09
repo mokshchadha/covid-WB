@@ -55,19 +55,21 @@ function RtpcrRow({ rtpcrData, isAuthorized, person }) {
             </div>
           }
         >
-          <p>
-            {`Contact:- ${contact}`}
-            <br />
-            {`Address:- ${address}`}
-            <br />
-            {`LastUpdated:- ${getDate(lastUpdated)}`}
-            <br />
-            {`Verified By:- ${updatedBy}`}
-          </p>
-          <div>
-            {isAuthorized && person && (
-              <EditRtpcr rtpcrCenter={rtpcrData} person={person} />
-            )}
+          <div style={{ marginLeft: "10px" }}>
+            <p>
+              {`Contact:- ${contact}`}
+              <br />
+              {`Address:- ${address}`}
+              <br />
+              {`LastUpdated:- ${getDate(lastUpdated)}`}
+              <br />
+              {`Verified By:- ${updatedBy}`}
+            </p>
+            <div>
+              {isAuthorized && person && (
+                <EditRtpcr rtpcrCenter={rtpcrData} person={person} />
+              )}
+            </div>
           </div>
         </ReactCollapsible>
       </div>

@@ -28,7 +28,7 @@ export function ContactUs() {
             <br />
             3. Preetika (7063634795)
             <br />
-            4. Sagnic (7063634795)
+            4. Sagnic (8972257249)
             <br />
             5. Srinjayee (9933980505)
             <br />
