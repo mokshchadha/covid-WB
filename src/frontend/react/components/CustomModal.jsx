@@ -1,17 +1,17 @@
 import React, { Component } from "react";
-import { Modal, Button } from "react-materialize";
+import { Button } from "react-materialize";
+import Modal from "react-modal";
 
 export class CustomModal extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { openModal: false };
   }
 
   render() {
     const {
       showTriggerButton = true,
       buttonIcon = null,
-      show,
       headerTitle = "Modal Header",
       buttonTooltip = null,
       buttonName,
@@ -21,48 +21,48 @@ export class CustomModal extends Component {
       className = "",
       disabled = false,
       btnStyle = {},
-      modalStyle = {},
+      modalStyle = {
+        content: {
+          top: "50%",
+          left: "50%",
+          right: "auto",
+          bottom: "auto",
+          marginRight: "-50%",
+          transform: "translate(-50%, -50%)",
+        },
+      },
       fixedFooter = false,
       actions = [],
     } = this.props;
+
+    const { openModal } = this.state;
     return (
-      <Modal
-        actions={actions}
-        bottomSheet={false}
-        fixedFooter={fixedFooter}
-        header={headerTitle}
-        id="Modal-0"
-        open={show}
-        style={modalStyle}
-        options={{
-          dismissible: true,
-          endingTop: "10%",
-          inDuration: 250,
-          onCloseEnd: handleClose,
-          onCloseStart: null,
-          onOpenEnd: handleShow,
-          onOpenStart: null,
-          opacity: 0.5,
-          outDuration: 250,
-          preventScrolling: false,
-          startingTop: "4%",
-        }}
-        trigger={
-          showTriggerButton && (
-            <Button
-              tooltip={buttonTooltip}
-              node="button"
-              className={className}
-              disabled={disabled}
-              style={btnStyle}
-            >
-              {buttonName} {buttonIcon}
-            </Button>
-          )
-        }
-      >
-        {children}
-      </Modal>
+      <div>
+        <Button
+          tooltip={buttonTooltip}
+          node="button"
+          className={className}
+          disabled={disabled}
+          style={btnStyle}
+          onClick={(e) => this.setState({ openModal: true })}
+        >
+          {buttonName} {buttonIcon}
+        </Button>
+        <Modal
+          isOpen={openModal}
+          onAfterOpen={handleShow}
+          onRequestClose={handleClose}
+          style={modalStyle}
+          contentLabel={headerTitle ? headerTitle : "Modal"}
+        >
+          <div>
+            <button onClick={() => this.setState({ openModal: false })}>
+              close
+            </button>
+            {children}
+          </div>
+        </Modal>
+      </div>
     );
   }
 }

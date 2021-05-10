@@ -49,7 +49,6 @@ export class EditListing extends Component {
           show={showModal}
           buttonName={"Edit"}
           headerTitle={"Edit"}
-          //disabled={}
         >
           {showModal && (
             <EditHospitalForm

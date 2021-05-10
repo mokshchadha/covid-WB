@@ -83,6 +83,7 @@ class EditRtpcrForm extends Component {
       flexDirection: "row",
       justifyContent: "space-between",
       width: "250px",
+      fontSize: "11px",
     };
     return (
       <div>
