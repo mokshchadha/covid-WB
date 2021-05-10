@@ -20,6 +20,10 @@ export function ImportantLinks() {
             Integrated Covid Management System (WB-ICMS)
           </p>
         </a>
+        <a href="https://covidwb.com/" className="collection-item">
+          <GoVerified style={{ marginRight: "5px" }} />
+          Covid India WB Resources
+        </a>
       </div>
     </div>
   );

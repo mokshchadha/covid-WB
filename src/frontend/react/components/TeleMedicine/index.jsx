@@ -7,11 +7,19 @@ export function Telemedicine() {
         <tbody>
           <tr>
             <td>
-              <b>Location</b>
+              <b>Person/Entity</b>
             </td>
             <td>
               <b>Contact</b>
             </td>
+          </tr>
+          <tr>
+            <td>Dr. Tathagata Sahoo</td>
+            <td> 7063422119, 8902245095 / 8902245094(whatsapp)</td>
+          </tr>
+          <tr>
+            <td>Dr. Ankit Kumar Chakraborty</td>
+            <td>9831039601 (calling/whatsapp)</td>
           </tr>
           <tr>
             <td>Haldia Municipality</td>
