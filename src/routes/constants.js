@@ -70,6 +70,11 @@ const isEmailVerified = (email) => {
       name: "Ritika",
       phone: "6289790508",
     },
+    "preetikaitis@gmail.com": {
+      email: "preetikaitis@gmail.com",
+      name: "Pritika",
+      phone: "7063634795",
+    },
   };
   if (!Object.keys(mailMap).includes(email))
     throw "Sorry, Person Not Authorized!";
