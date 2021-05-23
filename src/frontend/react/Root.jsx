@@ -3,6 +3,7 @@ import _ from "lodash";
 import { HospitalListing } from "./components/HospitalListing/Listing";
 import { RtpcrListing } from "./components/RtpcrListing/Listing";
 import { About } from "./components/About/About";
+import { OxygenListing } from "./components/Oxygen/";
 import { Telemedicine } from "./components/TeleMedicine";
 import { ContactUs } from "./components/ContactUs";
 import { ImportantLinks } from "./components/ImportantLinks";
@@ -16,6 +17,8 @@ import {
   FaAmbulance,
 } from "react-icons/fa";
 import { BsInfoCircleFill, BsFillPersonCheckFill } from "react-icons/bs";
+import { GoVerified } from "react-icons/go";
+import { GiHospitalCross } from "react-icons/gi";
 import {
   initializePublicOauth,
   serverSideVerification,
@@ -97,11 +100,14 @@ export class Root extends Component {
               <Collapsible>
                 <li>
                   <div className="collapsible-header">
-                    <BsFillPersonCheckFill style={{ marginRight: "20px" }} />
-                    CONTACT US
+                    <GiHospitalCross style={{ marginRight: "20px" }} />
+                    OXYGEN LEADS
                   </div>
                   <div className="collapsible-body">
-                    <ContactUs />
+                    <OxygenListing
+                      isAuthorized={isAuthorized}
+                      person={person}
+                    />
                   </div>
                 </li>
               </Collapsible>
@@ -110,7 +116,7 @@ export class Root extends Component {
               <Collapsible>
                 <li>
                   <div className="collapsible-header">
-                    <FaLink style={{ marginRight: "20px" }} />
+                    <GoVerified style={{ marginRight: "20px" }} />
                     VERIFIED OFFICIAL LINKS
                   </div>
                   <div className="collapsible-body">
@@ -128,6 +134,19 @@ export class Root extends Component {
                   </div>
                   <div className="collapsible-body">
                     <RtpcrListing isAuthorized={isAuthorized} person={person} />
+                  </div>
+                </li>
+              </Collapsible>
+            </ul>
+            <ul>
+              <Collapsible>
+                <li>
+                  <div className="collapsible-header">
+                    <BsFillPersonCheckFill style={{ marginRight: "20px" }} />
+                    CONTACT US
+                  </div>
+                  <div className="collapsible-body">
+                    <ContactUs />
                   </div>
                 </li>
               </Collapsible>

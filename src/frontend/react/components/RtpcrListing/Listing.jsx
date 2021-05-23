@@ -12,7 +12,6 @@ export class RtpcrListing extends Component {
   componentDidMount() {
     fetch("/rtpc").then(async (e) => {
       const rtpcr = await e.json();
-      console.log("rtpcr ", rtpcr);
       this.setState({ rtpcr });
     });
   }

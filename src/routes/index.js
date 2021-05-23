@@ -1,7 +1,7 @@
 const Router = require("router");
 const _ = require("lodash");
 const { ObjectId } = require("mongodb");
-const { Hospital, RtpcrCentres } = require("../repo");
+const { Hospital, RtpcrCentres, OxygenLeads } = require("../repo");
 const { gpHTML } = require("../frontend/pages/main");
 const { isEmailVerified } = require("./constants");
 
@@ -29,6 +29,32 @@ httprouter.route("/data").get(async function (req, res) {
     res.sendError(500, { msg: "server crash" });
   }
 });
+
+httprouter
+  .route("/oxygen")
+  .get(async function (req, res) {
+    try {
+      const data = await OxygenLeads.find({});
+      res.sendObject(data);
+    } catch (error) {
+      console.error(error);
+      res.sendError(500, { msg: "server crash" });
+    }
+  })
+  .post(async function (req, res) {
+    try {
+      const reqData = await req.getRequestBody();
+      const { data, person } = reqData;
+      const filtered = transformOxygenUpdate(data, person);
+      console.log("filtered data  in o2", filtered);
+      const o = new OxygenLeads(filtered);
+      await o.save();
+      res.sendObject({ msg: "Success" });
+    } catch (error) {
+      console.error(error);
+      res.sendError(400, { msg: "Error" + error });
+    }
+  });
 
 httprouter.route("/rtpc").get(async function (req, res) {
   try {
@@ -80,6 +106,23 @@ httprouter.route("/rtpcr/:id").post(async function (req, res) {
   }
 });
 
+httprouter.route("/oxygen/:id").post(async function (req, res) {
+  try {
+    const reqData = await req.getRequestBody();
+    const { data, person } = reqData;
+    const filtered = transformOxygenUpdate(data, person);
+    console.log("filtered data  in o2", filtered);
+    await OxygenLeads.findOneAndUpdate(
+      { _id: ObjectId(req.params.id) },
+      filtered
+    );
+    res.sendObject({ msg: "Success" });
+  } catch (error) {
+    console.error(error);
+    res.sendError(400, { msg: "Error" + error });
+  }
+});
+
 const transformUpdate = (data, person) => {
   const res = {
     ...data,
@@ -93,6 +136,16 @@ const transformUpdate = (data, person) => {
 };
 
 const transformRtpcrUpdate = (data, person) => {
+  const res = {
+    ...data,
+    name: data?.name ? data.name.toUpperCase() : "",
+    lastUpdated: new Date().getTime(),
+    updatedBy: `${person.email}-(${person.phone})`,
+  };
+  return _.omit(res, ["_id", "__v"]);
+};
+
+const transformOxygenUpdate = (data, person) => {
   const res = {
     ...data,
     name: data?.name ? data.name.toUpperCase() : "",
