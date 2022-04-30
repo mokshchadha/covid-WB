@@ -1,6 +1,8 @@
 # covid-WB
 a simple website to see the current state of available resource  in west bengal.
 
+<a href='https://covid-wb.herokuapp.com/' target='_blank'>Live Site</a>
+
 Interactive UI with Google authentication that only allows registered users to update the data with credibility.
 ![Image showing the Covid-WB website ](https://i.ibb.co/6sdNdwP/Screenshot-from-2021-06-12-14-54-04.png)
 
